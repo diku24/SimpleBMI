@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arogya Bmi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="C:\Users\tdiku\Documents\BMI\bmi.css">
+    
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 50%;
+      }
+
+      th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+          font-family: "Comic Sans MS", cursive, sans-serif;
+          background-color: #4CAF50;
+      }
+      td{
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+          font-family: "Comic Sans MS", cursive, sans-serif;
+          
+      }
+
+      tr:nth-child(even) {
+          background-color: #dddddd;
+          font-family: "Comic Sans MS", cursive, sans-serif;
+      }
+
+      caption{
+          padding: 8px;
+      }
+      p{
+         font-family: "Comic Sans MS", cursive, sans-serif,bold;
+     }
+
+ </style>
+
+ <script type="text/javascript">
+
+    function computeBMI() {
+                    // user inputs
+                    var height = Number(document.getElementById("height").value);
+                    var heightunits = document.getElementById("heightunits").value;
+                    var weight = Number(document.getElementById("weight").value);
+                    var weightunits = document.getElementById("weightunits").value;
+
+                    var table_under= "<p> This is Underweight paragraph</p><table><caption>Underweight</caption><tr><th>Diet</th><th>Excersise</th></tr><tr><td>Methi</td><td>Pull ups</td></tr></table>";
+                    var table_normal= "<p> This is Normal paragraph</p><table><caption>Normal</caption><tr><th>Diet</th><th>Excersise</th></tr><tr><td>Methi</td><td>Pull ups</td></tr></table>";
+                    var table_obese= "<p> This is Obese Paragraph</p><table><caption>Obese</caption><tr><th>Diet</th><th>Excersise</th></tr><tr><td>Methi</td><td>Pull ups</td></tr></table>";
+                    var table_over= "<p> This is Overweight paragraph</p><table><caption>Overweight</caption><tr><th>Diet</th><th>Excersise</th></tr><tr><td>Methi</td><td>Pull ups</td></tr></table>";
+
+                    //Convert all units to metric
+                    if (heightunits == "inches") height /= 39.3700787;
+                    if (weightunits == "lb") weight /= 2.20462;
+                    //Perform calculation
+                    // formula
+                    var BMI = Math.round(weight / Math.pow(height, 2) * 10000);
+
+                    //Display result of calculation
+                    document.getElementById("output").innerText = Math.round(BMI * 100) / 100;
+
+                    var output = Math.round(BMI * 100) / 100
+                    if (output < 18.5)
+                        document.getElementById('tablePrint').innerHTML = table_under;
+                    else if (output >= 18.5 && output <= 25)
+                        document.getElementById('tablePrint').innerHTML = table_normal;
+                    else if (output >= 25 && output <= 30)
+                        document.getElementById('tablePrint').innerHTML = table_obese;
+                    else if (output > 30)
+                        document.getElementById('tablePrint').innerHTML = table_over;
+                }
+            </script>
+        </head>
+
+        <body>
+            <div class="w3-container" align="center">
+                <div class="w3-card-4" style="width:50%;" align="center">
+                   <div class="w3-container w3-blue">
+                    <h1>Body Mass Index Calculator</h1>
+                </div>
+
+                <div class="w3-container">
+                    <p><label>Enter Your Height: </label><input type="text" id="height"/>
+                        <select type="multiple" id="heightunits">
+                            <option value="metres" selected="selected">Centimetres</option>
+                            <option value="inches">Inches</option>
+                        </select>
+                    </p>
+
+                    <p><label>Enter Your Weight:</label> <input type="text" id="weight"/>
+                        <select type="multiple" id="weightunits">
+                            <option value="kg" selected="selected">Kilograms</option>
+                            <option value="lb">Pounds</option>
+                        </select>
+                    </p>
+
+                    <input class="w3-button w3-round w3-hover-red" type="submit" value="computeBMI" onclick="computeBMI();"> 
+                    
+                </div>
+
+                <footer class="w3-container w3-blue">
+                    <h5>Your BMI is : <span id="output">??</span></h5>
+                </footer>
+
+            </div>
+            <h2><div  id="tablePrint"></div></h2> 
+        </div>
+
+    </body> 
+    </html>
